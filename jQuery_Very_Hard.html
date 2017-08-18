@@ -22,26 +22,30 @@ Add Comment Collapse-->
     <meta name="description">
   </head>
   <body>
-      <form method="post">
-        <div> 
-            How many sets do you want to do? <input /> 
+      <form method="post" id="tabataTimer">
+        <div>
+            <label for="numberOfSets">How many sets do you want to do? </label>
+            <input type="number" id="numberOfSets" name="numberOfSets" value=""/> 
         </div>
-        <div> 
-            How long would you like each set to be? (in seconds) <input id="set"/> 
+        <div>
+            <label for="setLength">How long would you like each set to be? (in seconds) </label>
+            <input type="number" id="setLength" name="setLength" value="20"/> 
         </div>
-        <div> 
-            How long would you like the rest period to be? (in seconds) <input id="rest"/> 
+        <div>
+            <label for="restLength">How long would you like the rest period to be? (in seconds) </label>
+            <input type="number" id="restLength" name="restLength" value="10"/> 
         </div>
         <div id="timer"> 
         </div>
-        <input  type="submit" value="Submit" />  
+        <input type="submit" value="Submit" id="submitEvent" />
+        <input type="reset">
       </form>
     <p>Once you have filled out the above questions, please click the start button to begin the timer.</p>
-    <button>Start Timer</button>  
-    <script
-      src="https://code.jquery.com/jquery-3.2.1.js"
-      integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-      crossorigin="anonymous"></script>
+    <button id="startTimer">Start Timer</button>
+    <div>
+        <p id="clock"></p>
+    </div>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="jQuery_Very_Hard.js"></script>
   </body>
 </html>
