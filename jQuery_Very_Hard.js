@@ -1,5 +1,5 @@
 $(document).ready(function(){
-   var numberOfSets, setLength, restLength, clock, timer, restClock, restTimer;
+   var numberOfSets, setLength, restLength;
     
     
     //retrieves and store input values
@@ -34,40 +34,29 @@ $(document).ready(function(){
 //        $(this).addClass("restTimer");  
       
         $('#stop').click(function(){
-            restClock();
+            restFunc();
         });  
         
         //start timer
         var timer = null, 
             interval = 1000,
             sec = setLength;
-        var sets = [];
-        var i = 0;
-        console.log(sets);    
-      
+
                 if (timer !== null) return;
                 function clock (val) {return val > 9 ? val : "0" + val;}
                 timer = setInterval(function(){
                     $("#seconds").html(clock(--sec%60));
-                    $("#counter").html(sets[i]);  
+                    $("#counter").html(sets[x]);  
                      if(sec === 0){
                         clearInterval(timer);
-                        restClock();
+                        restFunc();
                         $('#seconds').html('--');
-                        for ( i = 0; sets[i] < numberOfSets; i++){
-                            sets.push(i);
-                            console.log(i);
-                            
-                            } // for function
-                         
                      } else {
-                         
                         $('#stop').click(function(){
                             clearInterval(timer);
                             $('#seconds').html('--');
                         });   
                      } //if
-                    
                  }, interval);
                 //timer
                 console.log(sec);
@@ -76,9 +65,9 @@ $(document).ready(function(){
             var restVariable = null, 
                 restInterval = 1000,
                 restSec = restLength;
-            var restSets = [];
+            var sets = [];
             var x = 0;
-            function restClock () {   
+            function restFunc () {   
             function restClock (val) {return val > 9 ? val : "0" + val;}
 
             if (restVariable !== null) return;    
@@ -87,19 +76,17 @@ $(document).ready(function(){
                 $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
                  if(restSec === 0){
                     clearInterval(restTimer);
-                    restVariable = null;
                     $('#restSeconds').html('--');  
                     clock();
-                    for ( x = 0; restSets[x] < numberOfSets; x++){
-                            restSets.push(x);
-                            console.log(x);
-                            
-                            } // for function 
+                    for ( x = 0; sets < numberOfSets; x++){
+                        sets.push(x);
+                        console.log(x);
+                    } // for function 
                 }
             }, restInterval);
                
             console.log(restSec);
-            return restClock();    
+            console.log(sets);    
             };
        });// start tabata click event
 
