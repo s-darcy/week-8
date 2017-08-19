@@ -54,6 +54,7 @@ $(document).ready(function(){
                  if(sec === setLength){
                     clearInterval(timer);
                     timer = null;
+                    restClock(); 
                  }
             }, interval);
             return clock();
