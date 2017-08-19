@@ -1,5 +1,5 @@
 $(document).ready(function(){
-   var numberOfSets, setLength, restLength;
+   var numberOfSets, setLength, restLength, clock, timer, restClock, restTimer;
     
     
     //retrieves and store input values
@@ -39,7 +39,10 @@ $(document).ready(function(){
             });
 
     //6. Visually count down each activity period and then each rest period.
-        
+   
+    $('.startTimer').click(function(){
+        $(this).addClass("active");
+      
         //start timer
         var timer = null, 
             interval = 1000,
@@ -47,9 +50,7 @@ $(document).ready(function(){
         var sets = [];
         var i = 0;
         console.log(sets);    
-        $('.startTimer').click(function(){
-            $(this).addClass("active");
-
+      
                 if (timer !== null) return;
                 function clock (val) {return val > 9 ? val : "0" + val;}
                 timer = setInterval(function(){
@@ -57,7 +58,8 @@ $(document).ready(function(){
                     $("#counter").html(sets[i]);  
                      if(sec === 0){
                         clearInterval(timer);
-                        restClock(); 
+                        restClock();
+                        $('#seconds').html('--')
                         for ( i = 0; sets[i] < numberOfSets; i++){
                             sets.push(i);
                             console.log(i);
@@ -67,7 +69,7 @@ $(document).ready(function(){
                  }, interval); //timer
                 console.log(sec);
 
-        }); //rest timer
+            //rest timer
             var restVariable = null, 
                 restInterval = 1000,
                 restSec = restLength;    
@@ -81,14 +83,16 @@ $(document).ready(function(){
                  if(restSec === 0){
                     clearInterval(restTimer);
                     restVariable = null;
-                     clock();
-
+                    $('#restSeconds').html('--');  
+                    clock();
+                     
                 }
             }, restInterval);
+               
             console.log(restSec);
             return restClock();    
             };
-
+       });// start tabata click event
 
     }); //submit event
 }); //document.ready 
@@ -96,47 +100,3 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
-
-//    function secondsConverter(d) {
-//        d = Number(d);
-//
-//        var h = Math.floor(d / 3600);
-//        var m = Math.floor(d % 3600 / 60);
-//        var s = Math.floor(d % 3600 % 60);
-//
-//        return ('0' + h).slice(-2) + ":" + ('0' + m).slice(-2) + ":" + ('0' + s).slice(-2);
-//     } //secondsConvter
-
-
-//    secondsConverter(setLength);
-
-//var endClock = now - startClock;
-
-
-
-
-
-//    setInterval(function(){
-//            var set = (parseInt($("#set").val(), 10))*1000;
-//            console.log(set);
-//        }, 20000);
-//    });
-//});
-
-
-// Find the distance between now an the count down date
-//var countDown = end - startClock;
-
-//console.log($('#clock').html(seconds + "s"));
-//
-//
-
-//}
-//
