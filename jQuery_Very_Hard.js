@@ -42,18 +42,24 @@ $(document).ready(function(){
 //6. Visually count down each activity period and then each rest period.
        
     $('#startTimer').click(function(){
-//        var setMilliSeconds = setLength * 1000;
-        var time = 0; 
-        console.log(setLength);
-        var i = setInterval(function(){
-                time++;
-                if (time === setLength){
-                   clearInterval(i); 
-               } else { 
-                  
-               }
+        $(this).addClass("active");
+          var sec = 0;
+            function clock (val) {return val > 9 ? val : "0" + val;}
+            setInterval(function(){
+                $("#seconds").html(clock(++sec%60));
+                $("#minutes").html(clock(parseInt(sec/setLength, 10)));
             }, 1000);
-    });
+            console.log(sec);
+                if (sec === setLength){
+                    return clearInterval(clock);
+                        //call rest function to start it
+                } else if ($(this) !== "active") { 
+                       return clearInterval(clock);
+                        sec = 0;
+                } else {  
+
+                }    
+    }); //start timer
     
 
 
@@ -61,8 +67,7 @@ $(document).ready(function(){
 //    function countDown () {
 //        if($(window))
 //    }    
-        
-console.log(countDown());        
+             
         
 //clearInterval(); this ends the timer        
         
