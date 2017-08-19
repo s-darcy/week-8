@@ -41,12 +41,20 @@ Add Comment Collapse-->
         <input type="reset">
       </form>
     <p>Once you have filled out the above questions, please click the start button to begin the timer.</p>
-    <button class="startTimer">Start Timer</button>
+      <button id="start"  class="startTimer">Start</button>
+      <button id="stop">Stop</button>
+      
     <div>
-        <p id="seconds"></p>
-        <p id="counter"></p>
-        <p id="restSeconds"></p>
-        <p id="restCounter"></p>
+        <div>
+            <h2>Tabata Timer</h2>
+            <p id="seconds"></p>
+            <p id="counter"></p>
+        </div>
+        <div>
+            <h2>Rest Timer</h2>
+            <p id="restSeconds"></p>
+            <p id="restCounter"></p>
+        </div>    
     </div>  
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script type="text/javascript" src="jQuery_Very_Hard.js"></script>

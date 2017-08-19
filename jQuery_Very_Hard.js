@@ -29,19 +29,15 @@ $(document).ready(function(){
         
 //5. Allow the user to stop the timer at any time after it has started.
         $('.startTimer').click(function(){
-           if($(this).html()=="Start Timer"){
-               $(this).html("Stop Timer");
+               $(this).html("Rest Timer");
                $(this).removeClass("startTimer");
-               $(this).addClass("stopTimer");  
-           } else if ($(this).hasClass("stopTimer")){
-               $(this).html("Start Timer");
-               $(this).removeClass("stopTimer");
-               $(this).addClass("restTimer"); 
-           } else {
-               $(this).html("Stopped");
-               $(this).removeClass("restTimer");
-               $(this).addClass("stopTimer");
-           }
+               $(this).addClass("restTimer");  
+        });
+        
+        $('#stop').click(function(){
+            clearInterval(timer);
+            console.log(restClock());
+            timer = null;
         });
     
 //6. Visually count down each activity period and then each rest period.
@@ -72,17 +68,14 @@ $(document).ready(function(){
         var restTimer = setInterval(function(){
             $("#restSeconds").html(restClock(++restSec%60));
             $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
-        }, 1000);    
-    };
-    $('.stopTimer').click(function(){
-            clearInterval(timer);
-            console.log(restClock());
+        }, 1000); 
+        if(restSec === restLength){
+            clearInterval(restTimer);
             timer = null;
-    });
+        }
+    };
+
    
-
-        
-
     //Loop to decrement
 //    function countDown () {
 //        if($(window))
