@@ -11,12 +11,11 @@ $(document).ready(function(){
         console.log(numberOfSets);
         
     
-//    //converts current time into a digital clock
-    var startClock = new Date().toTimeString();
+    //converts current time into a digital clock
+    var curClock = new Date().toTimeString();
 //        .replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
         
         
-    
 //4. Allow the user to start the timer once those questions have been answered.    
     //checks if all inputs are complete
     $('#startTimer').click(function(){
@@ -24,12 +23,13 @@ $(document).ready(function(){
             $('#clock').html("Please fill out all fields.");
         } else {
             //inserts clock onto DOM
-            $('#clock').html(startClock);
+            $('#clock').html(curClock);
         }
     }); //if/else inputs checkers
     
-    console.log(startClock);
+    console.log(curClock);
     
+        
 //5. Allow the user to stop the timer at any time after it has started.
         $('#startTimer').click(function(){
            if($(this).html()=="Start Timer"){
@@ -39,6 +39,33 @@ $(document).ready(function(){
            } 
         });
     
+//6. Visually count down each activity period and then each rest period.
+       
+    $('#startTimer').click(function(){
+//        var setMilliSeconds = setLength * 1000;
+        var time = 0; 
+        console.log(setLength);
+        var i = setInterval(function(){
+                time++;
+                if (time === setLength){
+                   clearInterval(i); 
+               } else { 
+                  
+               }
+            }, 1000);
+    });
+    
+
+
+    //Loop to decrement
+//    function countDown () {
+//        if($(window))
+//    }    
+        
+console.log(countDown());        
+        
+//clearInterval(); this ends the timer        
+        
     console.log(setLength);
 
     }); //submit event
@@ -88,10 +115,6 @@ $(document).ready(function(){
 //console.log($('#clock').html(seconds + "s"));
 //
 //
-//function start() {
-//    var startTimer = setInterval(function () {
-//        set.val()++;
-//    }, 1000);
+
 //}
 //
-//start();
