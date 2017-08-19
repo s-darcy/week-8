@@ -25,24 +25,18 @@ $(document).ready(function(){
 
         console.log(curClock);
 
-
     //5. Allow the user to stop the timer at any time after it has started.
-            $('.startTimer').click(function(){
-                   $(this).removeClass("startTimer");
-                   $(this).addClass("restTimer");  
-            });
-
-            $('#stop').click(function(){
-                clearInterval(timer);
-                console.log(restClock());
-                timer = null;
-            });
-
     //6. Visually count down each activity period and then each rest period.
    
     $('.startTimer').click(function(){
         $(this).addClass("active");
+//        $(this).removeClass("startTimer");
+//        $(this).addClass("restTimer");  
       
+        $('#stop').click(function(){
+            restClock();
+        });  
+        
         //start timer
         var timer = null, 
             interval = 1000,
@@ -59,20 +53,31 @@ $(document).ready(function(){
                      if(sec === 0){
                         clearInterval(timer);
                         restClock();
-                        $('#seconds').html('--')
+                        $('#seconds').html('--');
                         for ( i = 0; sets[i] < numberOfSets; i++){
                             sets.push(i);
                             console.log(i);
                             
                             } // for function
+                         
+                     } else {
+                         
+                        $('#stop').click(function(){
+                            clearInterval(timer);
+                            $('#seconds').html('--');
+                        });   
                      } //if
-                 }, interval); //timer
+                    
+                 }, interval);
+                //timer
                 console.log(sec);
-
+                
             //rest timer
             var restVariable = null, 
                 restInterval = 1000,
-                restSec = restLength;    
+                restSec = restLength;
+            var restSets = [];
+            var x = 0;
             function restClock () {   
             function restClock (val) {return val > 9 ? val : "0" + val;}
 
@@ -85,7 +90,11 @@ $(document).ready(function(){
                     restVariable = null;
                     $('#restSeconds').html('--');  
                     clock();
-                     
+                    for ( x = 0; restSets[x] < numberOfSets; x++){
+                            restSets.push(x);
+                            console.log(x);
+                            
+                            } // for function 
                 }
             }, restInterval);
                
