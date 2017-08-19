@@ -29,7 +29,6 @@ $(document).ready(function(){
         
 //5. Allow the user to stop the timer at any time after it has started.
         $('.startTimer').click(function(){
-               $(this).html("Rest Timer");
                $(this).removeClass("startTimer");
                $(this).addClass("restTimer");  
         });
@@ -52,7 +51,12 @@ $(document).ready(function(){
             timer = setInterval(function(){
                 $("#seconds").html(clock(++sec%60));
                 $("#counter").html(clock(parseInt(sec/setLength, 10)));
+                 if(sec === setLength){
+                    clearInterval(timer);
+                    timer = null;
+                 }
             }, interval);
+            return clock();
             console.log(sec);
 //                if (sec === setLength){
 //                    return clearInterval(clock);
@@ -61,21 +65,31 @@ $(document).ready(function(){
 //                    clearInterval(clock);
 //                }
     }); //start timer
-        
-    function restClock () {
-        var restSec = 0;    
+        var restVariable = null, 
+            restInterval = 1000,
+            restSec = 0;    
+        function restClock () {   
         function restClock (val) {return val > 9 ? val : "0" + val;}
+        
+        if (restVariable !== null) return;    
         var restTimer = setInterval(function(){
             $("#restSeconds").html(restClock(++restSec%60));
             $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
-        }, 1000); 
-        if(restSec === restLength){
-            clearInterval(restTimer);
-            timer = null;
-        }
-    };
+             if(restSec === restLength){
+                clearInterval(restTimer);
+                restVariable = null;
+                 timer();
+            }
+        }, restInterval);
+        console.log(restSec);
+        return restClock();    
+        };
 
-   
+//        function restChecker(){
+//           
+//        }; 
+//        restChecker();    
+//   
     //Loop to decrement
 //    function countDown () {
 //        if($(window))
