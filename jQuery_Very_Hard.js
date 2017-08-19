@@ -8,98 +8,87 @@ $(document).ready(function(){
         setLength = parseInt($('#setLength').val());
         restLength = parseInt($('#restLength').val());
         event.preventDefault();
-        console.log(numberOfSets);
-        
-    
-    //converts current time into a digital clock
-    var curClock = new Date().toTimeString();
-//        .replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
-        
-        
-//4. Allow the user to start the timer once those questions have been answered.    
-    //checks if all inputs are complete
-    $('.startTimer').click(function(){
-        if(!numberOfSets || !setLength || !restLength){
-            $('#clock').html("Please fill out all fields.");
-        }
-    }); //if/else inputs checkers
-    
-    console.log(curClock);
-    
-        
-//5. Allow the user to stop the timer at any time after it has started.
+
+
+        //converts current time into a digital clock
+        var curClock = new Date().toTimeString();
+    //        .replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+
+
+    //4. Allow the user to start the timer once those questions have been answered.    
+        //checks if all inputs are complete
         $('.startTimer').click(function(){
-               $(this).removeClass("startTimer");
-               $(this).addClass("restTimer");  
-        });
-        
-        $('#stop').click(function(){
-            clearInterval(timer);
-            console.log(restClock());
-            timer = null;
-        });
-    
-//6. Visually count down each activity period and then each rest period.
-    var timer = null, 
-        interval = 1000,
-        sec = 0;   
-    $('.startTimer').click(function(){
-        $(this).addClass("active");
-
-        if (timer !== null) return;
-            function clock (val) {return val > 9 ? val : "0" + val;}
-            timer = setInterval(function(){
-                $("#seconds").html(clock(++sec%60));
-                $("#counter").html(clock(parseInt(sec/setLength, 10)));
-                 if(sec === setLength){
-                    clearInterval(timer);
-                    timer = null;
-                    restClock(); 
-                 }
-            }, interval);
-            return clock();
-            console.log(sec);
-//                if (sec === setLength){
-//                    return clearInterval(clock);
-//                        //call rest function to start it
-//                } else {  
-//                    clearInterval(clock);
-//                }
-    }); //start timer
-        var restVariable = null, 
-            restInterval = 1000,
-            restSec = 0;    
-        function restClock () {   
-        function restClock (val) {return val > 9 ? val : "0" + val;}
-        
-        if (restVariable !== null) return;    
-        var restTimer = setInterval(function(){
-            $("#restSeconds").html(restClock(++restSec%60));
-            $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
-             if(restSec === restLength){
-                clearInterval(restTimer);
-                restVariable = null;
-                 timer();
+            if(!numberOfSets || !setLength || !restLength){
+                $('#clock').html("Please fill out all fields.");
             }
-        }, restInterval);
-        console.log(restSec);
-        return restClock();    
-        };
+        }); //if/else inputs checkers
 
-//        function restChecker(){
-//           
-//        }; 
-//        restChecker();    
-//   
-    //Loop to decrement
-//    function countDown () {
-//        if($(window))
-//    }    
-             
+        console.log(curClock);
+
+
+    //5. Allow the user to stop the timer at any time after it has started.
+            $('.startTimer').click(function(){
+                   $(this).removeClass("startTimer");
+                   $(this).addClass("restTimer");  
+            });
+
+            $('#stop').click(function(){
+                clearInterval(timer);
+                console.log(restClock());
+                timer = null;
+            });
+
+    //6. Visually count down each activity period and then each rest period.
         
-//clearInterval(); this ends the timer        
-        
-    console.log(setLength);
+        //start timer
+        var timer = null, 
+            interval = 1000,
+            sec = setLength;
+        var sets = [];
+        var i = 0;
+        console.log(sets);    
+        $('.startTimer').click(function(){
+            $(this).addClass("active");
+
+                if (timer !== null) return;
+                function clock (val) {return val > 9 ? val : "0" + val;}
+                timer = setInterval(function(){
+                    $("#seconds").html(clock(--sec%60));
+                    $("#counter").html(sets[i]);  
+                     if(sec === 0){
+                        clearInterval(timer);
+                        restClock(); 
+                        for ( i = 0; sets[i] < numberOfSets; i++){
+                            sets.push(i);
+                            console.log(i);
+                            
+                            } // for function
+                     } //if
+                 }, interval); //timer
+                console.log(sec);
+
+        }); //rest timer
+            var restVariable = null, 
+                restInterval = 1000,
+                restSec = restLength;    
+            function restClock () {   
+            function restClock (val) {return val > 9 ? val : "0" + val;}
+
+            if (restVariable !== null) return;    
+            var restTimer = setInterval(function(){
+                $("#restSeconds").html(restClock(--restSec%60));
+                $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
+                 if(restSec === 0){
+                    clearInterval(restTimer);
+                    restVariable = null;
+                     clock();
+
+                }
+            }, restInterval);
+            console.log(restSec);
+            return restClock();    
+            };
+
 
     }); //submit event
 }); //document.ready 
