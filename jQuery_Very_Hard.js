@@ -32,12 +32,7 @@ $(document).ready(function(){
 //        $(this).addClass("restTimer");
         
         
-        var looperArray = [];  
-        
-         for (let i = 0; i < numberOfSets; i++){
-            looperArray.push(i);
-             
-             
+
             (function looperFunction() { 
             
             $('#stop').click(function(){
@@ -70,6 +65,8 @@ $(document).ready(function(){
                 var restVariable = null, 
                     restInterval = 1000,
                     restSec = restLength;
+                var restLooperArray = [];
+                var i;
                 function restFunc () {   
                     function restClock (val) {return val > 9 ? val : "0" + val;}
                     if (restVariable !== null) return;    
@@ -78,18 +75,20 @@ $(document).ready(function(){
                          if(restSec === 0){
                             clearInterval(restTimer);
                             $('#restSeconds').html('--');
-                            looperFunction(); 
+                            looperFunction();
+                            while (restLooperArray.length < numberOfSets){
+                                restLooperArray.push(i);
+                                i++;
+                                console.log(i)
+                            }; //loop 
+                            return;
+                            console.log(restLooperArray); 
                          } //if
                     }, restInterval);
-                    clock(); 
                     }; //restTimer
 
                 }) (); // IIFE looperFunction 
-             
-            console.log(i);
-        }; //for loop
-        
-        console.log(looperArray);     
+    
        });// start tabata click event 
         
     }); //submit event
