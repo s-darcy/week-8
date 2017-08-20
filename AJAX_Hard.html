@@ -1,0 +1,36 @@
+<!--HARD: Create a page with a form to enter your longitude and latitude. When the form is submitted, use jQuery's AJAX functions to display a list of date/times that the International Space Station will pass over the given location.
+HARD(BONUS): Add a button to your HARD solution that will use the browsers geolocation to set the longitude and latitude automatically.
+Add Comment Collapse-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>International Space Station Is Coming to You</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description">
+  </head>
+  <body>
+      <form>
+        <p>Curious to when the International Space Station(ISS) is passing by you? Type in your Longitude and Latitude and find out a list of date and times when it will over your head.</p>
+        <p>Helpful Hint: Latitude must be number between -90.0 and 90.0</p>  
+          <div>
+            <label>Longitude: </label>  
+            <input id="longitude" type="number" />
+          </div>
+          <div>
+            <label>Latitude: </label>  
+            <input id="latitude" type="number" />
+          </div>
+        <ul id="dateTimes">
+        </ul>  
+        <input type="submit" value="Submit" id="submitEvent" />  
+      </form>
+      <script
+          src="https://code.jquery.com/jquery-3.2.1.js"
+          integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+          crossorigin="anonymous"></script>
+      <script src="AJAX_Hard.js"></script>
+  </body>
+</html>

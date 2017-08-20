@@ -1,21 +1,23 @@
-$.getJSON({
-    url: "https://weathers.co/api.php?city=Charlotte&jsoncallback=?",
-    data: {
-    "location":"Charlotte, NC",
-    "temperature":"24",
-    "skytext":"Broken Clouds"},
-    success: function(data) {
+$(document).ready(function(){
+    $('#getWeather').click(function(e){
+        e.preventDefault();
+//        var weatherAPI = "https://weathers.co/api.php?city=charlotte";
+//        var data = {
+//            "location"    : "Charlotte",
+//            "temperature" : "28",
+//            "skytext"     : "Scattered clouds"
+//        };
         
-    var location = data['location'];
-    var temperature = data['temperature'];
-    var skytext = data['skytext'];
-      if(data == "ok") {
-          $('#weatherRequest').html(location + "'s current temperature is: " + temperature + " and their current sky condition is " + skytext);
-        } // if
-    } // success
-}); // end ajax call
-
-
+        
+            
+        $.getJSON('https://weathers.co/api.php?city=charlotte', function(data){
+            if(data == "ok") {
+              $('#weatherResponse').html("<p>" + data['location'] +  "current temperature is: " + data['temperature'] + " and their current sky condition is " + data['skytext'] + "</p>");
+                } // if
+            });          
+        
+    });// click event
+});// document.ready
 
 //    $('#temperature').html(temperature);
 //});
