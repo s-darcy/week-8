@@ -23,28 +23,23 @@ $(document).ready(function(){
             }
         }); //if/else inputs checkers
 
-        
-
     //5. Allow the user to stop the timer at any time after it has started.
     //6. Visually count down each activity period and then each rest period.
    
     $('.startTimer').click(function(e){
         $(this).addClass("active");
 //        $(this).removeClass("startTimer");
-//        $(this).addClass("restTimer");  
-      
-            var looperArray = [];  
-            for (var i = 0; i < numberOfSets; i++){
-                looperArray[i] = looperFunction(i);
-//                e.preventDefault();
-                console.log(i);
-            }; //for loop
-            console.log(looperArray);
+//        $(this).addClass("restTimer");
+        
+        
+        var looperArray = [];  
+        
+         for (let i = 0; i < numberOfSets; i++){
+            looperArray.push(i);
+             
+             
+            (function looperFunction() { 
             
-       });// start tabata click event
-        
-        function looperFunction() { 
-        
             $('#stop').click(function(){
                 restFunc();
             });  
@@ -53,7 +48,6 @@ $(document).ready(function(){
             var timer = null, 
                 interval = 1000,
                 sec = setLength;
-
                     if (timer !== null) return;
                     function clock (val) {return val > 9 ? val : "0" + val;}
                     timer = setInterval(function(){
@@ -76,27 +70,30 @@ $(document).ready(function(){
                 var restVariable = null, 
                     restInterval = 1000,
                     restSec = restLength;
-
                 function restFunc () {   
                     function restClock (val) {return val > 9 ? val : "0" + val;}
-
                     if (restVariable !== null) return;    
                     var restTimer = setInterval(function(){
-                        $("#restSeconds").html(restClock(--restSec%60));
-                        $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
+                        $("#restSeconds").html(restClock(--restSec%60));   $("#restCounter").html(restClock(parseInt(restSec/restLength, 10)));
                          if(restSec === 0){
                             clearInterval(restTimer);
-                            $('#restSeconds').html('--');  
+                            $('#restSeconds').html('--');
+                            looperFunction(); 
                          } //if
                     }, restInterval);
-                    clock();
-                    
-                    };
-            return looperFunction;
-                }; // looperFunction  
+                    clock(); 
+                    }; //restTimer
+
+                }) (); // IIFE looperFunction 
+             
+            console.log(i);
+        }; //for loop
         
+        console.log(looperArray);     
+       });// start tabata click event 
         
     }); //submit event
+    
 }); //document.ready 
 
 
