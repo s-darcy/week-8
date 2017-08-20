@@ -30,9 +30,22 @@ $(document).ready(function(){
         $(this).addClass("active");
 //        $(this).removeClass("startTimer");
 //        $(this).addClass("restTimer");
-        
-        
 
+//try an .each() method
+//     var looperArray = [];
+     var i = 0;   
+        $.each( function(i, looperFunction){
+            if (parseInt(i.length) === numberOfSets){
+                return alert("Congratulations!");
+            } else {
+                i++;
+//                looperArray.push(i);
+                looperFunction();
+            }
+        });
+        console.log(i);
+        
+        
             (function looperFunction() { 
             
             $('#stop').click(function(){
@@ -65,8 +78,7 @@ $(document).ready(function(){
                 var restVariable = null, 
                     restInterval = 1000,
                     restSec = restLength;
-                var restLooperArray = [];
-                var i;
+
                 function restFunc () {   
                     function restClock (val) {return val > 9 ? val : "0" + val;}
                     if (restVariable !== null) return;    
@@ -76,17 +88,17 @@ $(document).ready(function(){
                             clearInterval(restTimer);
                             $('#restSeconds').html('--');
                             looperFunction();
-                            while (restLooperArray.length < numberOfSets){
-                                restLooperArray.push(i);
-                                i++;
-                                console.log(i)
-                            }; //loop 
+//                            while (restLooperArray.length < numberOfSets){
+//                                restLooperArray.push(i);
+//                                i++;
+//                                console.log(i)
+//                            }; //loop 
                             return;
                             console.log(restLooperArray); 
                          } //if
                     }, restInterval);
                     }; //restTimer
-
+                return looperFunction;
                 }) (); // IIFE looperFunction 
     
        });// start tabata click event 
