@@ -4,28 +4,30 @@ $(document).ready(function(){
         var longitude = $('#longitude').val();
         var latitude = $('#latitude').val();
         console.log(longitude, latitude);
-        var URL = "http://api.open-notify.org/iss-pass.json?" + latitude + "=LAT&" + longitude + "=LON";
+        var URL = "http://api.open-notify.org/iss-pass.json?" + latitude + "=LAT&" + longitude + "=LON&jsoncallback=?";
         
         $.getJSON(URL, function(data) {
-            var passes = data['passes'];
-            var date = data['datetime'];
+            var riseTime = data['riseTime'];
+            var duration = data['duration']
                 
-            data['passes'].forEach(function(d){
-                $('#dateTimes').append('<li>' + d['passes'] + '  on ' + d['date'] + '</li>');
+            data['response'].forEach(function(d){
+                $('#dateTimes').append('<li>' + d['riseTime'] + '  on ' + d['duration'] + '</li>');
             });// forEach
         });// getJSON
 
-//http://api.open-notify.org/iss-pass.json?lat=LAT&lon=LON
-        
-        
-// "request": {
-//    "latitude": LATITUE,
-//    "longitude": LONGITUDE, 
-//    "altitude": ALTITUDE,
-//    "passes": NUMBER_OF_PASSES,
-//    "datetime": REQUEST_TIMESTAMP
-//  },
-    
-
     }); //submit Event
+    
+    $('#geolocator').click(function geoLocator() {
+        if (navigator.geoLocator) {
+            navigator.geoLocator.getCurrentPosition(showPosition);
+            function showPosition(position){
+               longAndLat.html("Longitude:" + position.coords.longitude + 
+                "<br>Latitude: " + position.coords.latitude); 
+            };// position
+        } else {
+            longAndLat.html("Geolocation is not supported by this browser.");
+        } // if/else
+    }); //getLocator
+
+    
 });// document.ready    
