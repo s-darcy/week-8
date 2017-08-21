@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    //longitude and latitude
     $('#submitEvent').click(function(e){
         e.preventDefault();
         var longitude = $('#longitude').val();
@@ -17,17 +18,20 @@ $(document).ready(function(){
 
     }); //submit Event
     
-    $('#geolocator').click(function geoLocator() {
-        if (navigator.geoLocator) {
-            navigator.geoLocator.getCurrentPosition(showPosition);
-            function showPosition(position){
-               longAndLat.html("Longitude:" + position.coords.longitude + 
-                "<br>Latitude: " + position.coords.latitude); 
-            };// position
-        } else {
-            longAndLat.html("Geolocation is not supported by this browser.");
-        } // if/else
-    }); //getLocator
+    //Bonus Geolocator
+    $('#geolocator').click(function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
 
-    
+            console.log(position.coords.longitude);
+        } else {
+            $('#longAndLat').html("Geolocation is not supported by this browser.");
+        } // if/else
+        
+        function showPosition(position){
+           $('#longAndLat').html("Longitude:" + position.coords.longitude + 
+            "<br>Latitude: " + position.coords.latitude); 
+        };// position
+        console.log(getLocation);
+    }); //getLocation
 });// document.ready    
