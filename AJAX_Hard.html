@@ -13,26 +13,27 @@ Add Comment Collapse-->
   </head>
   <body>
       <form method="get">
-        <p>Curious to when the International Space Station(ISS) is passing by you? Type in your Longitude and Latitude and find out a list of date and times when it will over your head.</p>
-        <p>Helpful Hint: Longitude and Latitude must be number between -90.0 and 90.0</p>  
-          <div>
+        <p>Curious as to when the International Space Station (ISS) is passing by you? Type in your Longitude and Latitude and find out a list of dates and times when it will be over your head.</p>
+        <div>
+            <p>If you are not sure of Longitude and Latitude, please click "Find It!"</p>
+            <button id="geolocator">Find It!</button>
+            <p id="longAndLat"></p>
+        </div> 
+        <div>
             <label>Longitude: </label>  
             <input id="longitude" type="number" />
-          </div>
-          <div>
+        </div>
+        <div>
             <label>Latitude: </label>  
             <input id="latitude" type="number" />
-          </div>
+        </div>
         <ul id="dateTimes">
         </ul>  
         <input type="submit" value="Submit" id="submitEvent" />
-        <div>
-            <p>If you are not sure of Longitude and Latitude, please click "Find It!" below:</p>
-            <button id="geolocator">Find It!</button>
-            <p id="longAndLat"></p>
-        </div>  
+ 
       </form>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+      <script src="date.js"></script>
       <script src="AJAX_Hard.js"></script>
   </body>
 </html>

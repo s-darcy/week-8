@@ -5,18 +5,24 @@ $(document).ready(function(){
         e.preventDefault();
         var longitude = $('#longitude').val();
         var latitude = $('#latitude').val();
-        console.log(longitude, latitude);
         var URL = "http://api.open-notify.org/iss-pass.json?lat=" + latitude + "&lon=" + longitude + "&callback=?";
        
         $.getJSON(URL, function(data) {
-            var riseTime = data['risetime'];
-            var duration = data['duration']
-                
+              
             data['response'].forEach(function(d){
-                $('#dateTimes').append('<li>' + d['risetime'] + '  on ' + d['duration'] + '</li>');
+                
+                console.log(d['risetime']);
+                var date = new Date(d['risetime']);
+                var fullDateTime = date.toString("dddd, MMMM dd, yyyy h:mm:ss tt");
+                
+                var duration = d['duration'];
+                var minutes = Math.floor(duration / 60);
+                var seconds = duration - minutes * 60;
+                var totalTime = (minutes +  " mins and " + seconds + " secs");
+                
+                $('#dateTimes').append('<li>' + fullDateTime + ' lasting for ' + totalTime + '</li>');
             });// forEach
         });// getJSON
-
     }); //submit Event
     
     //Bonus Geolocator
