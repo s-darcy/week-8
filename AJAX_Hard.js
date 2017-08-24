@@ -12,7 +12,7 @@ $(document).ready(function(){
             data['response'].forEach(function(d){
                 
                 console.log(d['risetime']);
-                var date = new Date(d['risetime']);
+                var date = new Date(d['risetime'] * 1000);
                 var fullDateTime = date.toString("dddd, MMMM dd, yyyy h:mm:ss tt");
                 
                 var duration = d['duration'];
