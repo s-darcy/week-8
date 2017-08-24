@@ -32,20 +32,21 @@ $(document).ready(function(){
 //        $(this).addClass("restTimer");
 
 //try an .each() method
-//     var looperArray = [];
-     var i = 0;   
-        $.each( function(i, looperFunction){
-            if (parseInt(i.length) === numberOfSets){
+//   var looperArray = [];
+     var i = numberOfSets;   
+        $.each(function(i, looperFunction){
+            if (i === 0){
                 return alert("Congratulations!");
+                looperFunction();
             } else {
-                i++;
-//                looperArray.push(i);
+                i--;
+                looperArray.push(i);
                 looperFunction();
             }
         });
         console.log(i);
         
-        
+        //Start Tabata Timer
             (function looperFunction() { 
             
             $('#stop').click(function(){
@@ -72,7 +73,6 @@ $(document).ready(function(){
                             });   
                          } //if
                      }, interval);
-                    //timer
 
                 //rest timer
                 var restVariable = null, 
@@ -88,11 +88,6 @@ $(document).ready(function(){
                             clearInterval(restTimer);
                             $('#restSeconds').html('--');
                             looperFunction();
-//                            while (restLooperArray.length < numberOfSets){
-//                                restLooperArray.push(i);
-//                                i++;
-//                                console.log(i)
-//                            }; //loop 
                             return;
                             console.log(restLooperArray); 
                          } //if
@@ -101,10 +96,8 @@ $(document).ready(function(){
                 return looperFunction;
                 }) (); // IIFE looperFunction 
     
-       });// start tabata click event 
-        
-    }); //submit event
-    
+       });// start tabata click event      
+    }); //submit event  
 }); //document.ready 
 
 
